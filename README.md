@@ -13,4 +13,9 @@ $ npm run start
 # watch mode
 $ npm run start:dev
 ```
-## Use insomnia file to test API
+## Use insomnia file to test API or use Swagger
+
+
+```
+ swagger: http://localhost:3000/api/
+```
