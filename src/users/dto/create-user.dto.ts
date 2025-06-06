@@ -10,6 +10,10 @@ export class CreateUserDto {
   @IsString({ message: 'O campo name deve ser uma string' })
   name: string;
 
+  @ApiProperty({
+    description: 'Nome do usuário',
+    example: 'jhondoe@email.com',
+  })
   @IsNotEmpty({ message: 'O campo email não pode estar vazio' })
   @IsString({ message: 'O campo email deve ser uma string' })
   email: string;

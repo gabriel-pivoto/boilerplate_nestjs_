@@ -21,8 +21,10 @@ export class UsersService {
   findOne(id: string) {
     return this.usersRepository.findOne(id, { include: { fruits: true } });
   }
-  update(id: string, data: UpdateUserDto) {
-    return this.usersRepository.update(id, data);
+  async update(id: string, data: UpdateUserDto) {
+    const hashedPassword = await bcrypt.hash(data.password, 10);
+    const userWithHashedPassword = { ...data, password: hashedPassword };
+    return this.usersRepository.update(id, userWithHashedPassword)
   }
 
   remove(id: string) {
