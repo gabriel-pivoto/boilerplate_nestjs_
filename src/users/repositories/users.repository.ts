@@ -12,14 +12,18 @@ export class UsersRepository implements IUsersRepository {
     return this.prisma.user.create({ data });
   }
 
-  async findAll() {
-    return this.prisma.user.findMany();
+  async findAll(params?: { include?: { fruits?: boolean } }) {
+    return this.prisma.user.findMany({
+      include: params?.include,
+    });
   }
 
-  async findOne(id: string) {
-    return this.prisma.user.findUnique({ where: { id } });
+  async findOne(id: string, params?: { include?: { fruits?: boolean } }) {
+    return this.prisma.user.findUnique({
+      where: { id },
+      include: params?.include,
+    });
   }
-
   async update(id: string, data: UpdateUserDto) {
     const exists = await this.prisma.user.findUnique({ where: { id } });
     if (!exists) throw new NotFoundException('Usuário não encontrado');
